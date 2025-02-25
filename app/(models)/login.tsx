@@ -32,7 +32,7 @@ const onSelectedAuth = async (strategy: Strategy) => {
     const {createdSessionId, setActive} = await selectedAuth();
     if(createdSessionId) {
       setActive!({session: createdSessionId})
-      router.back()
+      router.replace('/(tabs)')
     }
   } catch (error) {
     console.error("OAuth error", error)

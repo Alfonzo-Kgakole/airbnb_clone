@@ -77,8 +77,14 @@ function RootLayoutNav() {
   const { isLoaded, isSignedIn } = useAuth();
 
  useEffect(() => {
-  if(isLoaded && !isSignedIn) {
-    router.push('/(models)/login')
+  if(!isLoaded) return;
+
+  if(isSignedIn) {
+    // Redirect to home screen if signed in
+    router.replace('/(tabs)');
+  } else {
+    // Redirect to login if not signed in
+    router.replace('/(models)/login');
   }
  }, [isLoaded])
 
@@ -99,7 +105,7 @@ function RootLayoutNav() {
         )
       }} />
 
-      <Stack.Screen name="listing/[id]" options={{ headerTitle: '' }} />
+      <Stack.Screen name="listing/[id]" options={{ headerTitle: '', headerTransparent: true }} />
 
       <Stack.Screen name='(models)/booking'  options={{
         presentation: "transparentModal",
