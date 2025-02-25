@@ -1,13 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link, Stack } from 'expo-router'
 import ExploreHeader from '@/components/ExploreHeader'
+import listingsData from '@/assets/data/airbnb-listings.json'
 import Lisiting from '@/components/Lisiting'
 
+
 const Page = () => {
+  // useState
   const [category, setCategory] = useState('Tiny homes')
+
+
+  // useEffect
+
+
+  // useMemo
+  const items = useMemo(() => listingsData as any, [])
+
+
+  // methods
   const OnDataChanged = (category: string) => {
-    console.log(`Changed: `, category)
     setCategory(category)
   }
   return (
@@ -16,7 +28,7 @@ const Page = () => {
         header: () => <ExploreHeader onCategoryChange={OnDataChanged}/>
       }} />
 
-      <Lisiting listing={[]} category={category} />
+      <Lisiting listing={items} category={category} />
     </View>
   )
 }
