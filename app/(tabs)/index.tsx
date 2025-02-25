@@ -1,25 +1,26 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
+import React, { useState } from 'react'
+import { Link, Stack } from 'expo-router'
+import ExploreHeader from '@/components/ExploreHeader'
+import Lisiting from '@/components/Lisiting'
 
 const Page = () => {
+  const [category, setCategory] = useState('Tiny homes')
+  const OnDataChanged = (category: string) => {
+    console.log(`Changed: `, category)
+    setCategory(category)
+  }
   return (
-    <View>
-      <Link href={"/(models)/login"}>
-        <Text>Login</Text>
-      </Link>
+    <View style={{flex: 1, marginTop: 150}}>
+      <Stack.Screen options={{
+        header: () => <ExploreHeader onCategoryChange={OnDataChanged}/>
+      }} />
 
-      <Link href={"/(models)/booking"}>
-      <Text>Booking</Text>
-      </Link>
-
-      <Link href={"/listing/[id]"}>
-        <Text>Listing</Text>
-      </Link>
+      <Lisiting listing={[]} category={category} />
     </View>
   )
 }
 
-export default Page
-
 const styles = StyleSheet.create({})
+
+export default Page
